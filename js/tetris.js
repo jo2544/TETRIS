@@ -49,14 +49,14 @@ function prependNewLine(){
     li.prepend(ul)
     playground.prepend(li)
 }
-function renderBlocks(movetType){
+function renderBlocks(moveType=""){
     const { type, direction, top, left } = tempMovingItem;
     const movingBlocks = document.querySelectorAll(".moving")
     movingBlocks.forEach(moving => {
         moving.classList.remove(type, "moving")
       
     })
-    BLOCKS[type][direction].forEach(block => {
+    BLOCKS[type][direction].some(block => {
         const x = block[0] + left;
         const y = block[1] + top;
         const target = playground.childNodes[y] ? playground.childNodes[y].childNodes[0].childNodes[x] : null;
@@ -67,11 +67,12 @@ function renderBlocks(movetType){
             tempMovingItem = { ...MovingItem }
             setTimeout(()=> {
                 renderBlocks();
-                if(movetType == "top"){
+                if(moveType == "top"){
                     seizeBlock();
                 }
             },0)
             // renderBlocks()
+            return true;
         } 
     })
     MovingItem.left = left;
