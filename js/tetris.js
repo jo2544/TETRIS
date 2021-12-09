@@ -1,3 +1,5 @@
+import BLOCKS from " ./blocks.js"
+
 //DOM
 
 const playground = document.querySelector(".playground > ul");
@@ -18,6 +20,12 @@ const BLOCKS = {
         [[1,2],[0,1],[1,0],[1,1]],
         [[1,2],[0,1],[2,1],[1,1]],
         [[2,1],[1,2],[1,0],[1,1]],
+    ],
+    square: [
+        [[2,1],[0,1],[1,0],[1,1]],
+        [[1,2],[0,1],[1,0],[1,1]],
+        [[1,2],[0,1],[2,1],[1,1]],
+        [[2,1],[1,2],[1,0],[1,1]],
     ]
 }
 
@@ -33,7 +41,7 @@ init()
 //function
 function init(){
     tempMovingItem = {...MovingItem };
-for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 20; i++) {
         prependNewLine()
     }   
     renderBlocks()
@@ -88,6 +96,8 @@ function seizeBlock(){
     generateNewBlock()
 }
 function  generateNewBlock() {
+
+    MovingItem.type = ""
     MovingItem.top = 0;
     MovingItem.left = 3;
     MovingItem.direction = 0;

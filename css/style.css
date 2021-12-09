@@ -33,6 +33,21 @@ body {
     height: 25px;
     outline: 1px solid #ccc;
 }
+.square {
+    background: blue;
+}
 .tree {
     background:  #67c23a;
+}
+.bar {
+    background: salmon;
+}
+.zee {
+    background: #e6a23c;
+}
+.elLeft {
+    background: #8e44ad;
+}
+.elRight {
+    background: #16a085;
 }
