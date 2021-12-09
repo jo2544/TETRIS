@@ -80,10 +80,22 @@ function renderBlocks(moveType=""){
     MovingItem.direction = direction;
 }
 function seizeBlock(){
-
+    const movingBlocks = document.querySelectorAll(".moving")
+    movingBlocks.forEach(moving => {
+        moving.classList.remove("moving")
+        moving.classList.add("seized")
+    })
+    generateNewBlock()
+}
+function  generateNewBlock() {
+    MovingItem.top = 0;
+    MovingItem.left = 3;
+    MovingItem.direction = 0;
+    tempMovingItem = {...MovingItem};
+    renderBlocks()
 }
 function checkEmpty(target){
-    if(!target){
+    if(!target || target.classList.contains("seized")){
         return false;
     }
     return true;
