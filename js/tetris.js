@@ -1,4 +1,4 @@
-import BLOCKS from " ./blocks.js"
+import BLOCKS from "./blocks.js"
 
 //DOM
 
@@ -26,7 +26,7 @@ const BLOCKS = {
         [[1,2],[0,1],[1,0],[1,1]],
         [[1,2],[0,1],[2,1],[1,1]],
         [[2,1],[1,2],[1,0],[1,1]],
-    ]
+    ],
 }
 
 const MovingItem = {
@@ -40,8 +40,9 @@ init()
 
 //function
 function init(){
+ 
     tempMovingItem = {...MovingItem };
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < GAME_ROMS; i++) {
         prependNewLine()
     }   
     renderBlocks()
@@ -50,7 +51,7 @@ function init(){
 function prependNewLine(){
     const li = document.createElement("li");
     const ul = document.createElement("ul");
-    for(let j=0; j<10; j++){
+    for(let j=0; j< GAME_COLS; j++){
         const martrix = document.createElement("li");
         ul.prepend(martrix);
     }
@@ -95,9 +96,10 @@ function seizeBlock(){
     })
     generateNewBlock()
 }
-function  generateNewBlock() {
-
-    MovingItem.type = ""
+function generateNewBlock() {
+    const blockArray = Object.entries(BLOCKS);
+    const randomIndex = Math.floor(Math.random() * blockArray.length)
+    MovingItem.type = blockArray[randomIndex][0]
     MovingItem.top = 0;
     MovingItem.left = 3;
     MovingItem.direction = 0;
