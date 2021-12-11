@@ -16,7 +16,7 @@ let tempMovingItem;
 
 
 const MovingItem = {
-    type: "tree",
+    type: "",
     direction: 3,
     top: 0,
     left: 0,
@@ -31,7 +31,7 @@ function init(){
     for (let i = 0; i < GAME_ROMS; i++) {
         prependNewLine()
     }   
-    renderBlocks()
+    generateNewBlock()
 }
 
 function prependNewLine(){
@@ -80,9 +80,35 @@ function seizeBlock(){
         moving.classList.remove("moving")
         moving.classList.add("seized")
     })
+   checkMatch()
+}
+function checkMatch(){
+
+    const childNodes = playground.childNodes;
+    childNodes.forEach(child=>{
+        let matched = true;
+        child.children[0].childNodes.forEach(li=>{
+            if(!li.classList.contains("seized")){
+                matched = fasle;
+            }
+        })
+        if(matched){
+            child.remove();
+            prependNewLine()
+        }
+    })
     generateNewBlock()
 }
 function generateNewBlock() {
+
+    clearInterval(downInterval);
+    downInterval = setInterval(()=>{
+            moveBlock('top',1)
+    },duration)
+
+
+
+
     const blockArray = Object.entries(BLOCKS);
     const randomIndex = Math.floor(Math.random() * blockArray.length)
     MovingItem.type = blockArray[randomIndex][0]
@@ -107,6 +133,12 @@ function chageDirection(){
     direction === 3 ? tempMovingItem.direction =0 : tempMovingItem.direction +=1;
     renderBlocks
 }
+function dropblock() {
+    clearInterval(downInterval);
+    downInterval = setInterval(()=>{
+        moveBlock("top",1)
+    },10)
+}
 //event handling
 document.addEventListener("keydown", e => {
     switch(e.keyCode){
@@ -121,6 +153,9 @@ document.addEventListener("keydown", e => {
             break;
         case 38:
             chageDirection();
+            break;
+        case 32:
+            dropblock();
             break;
         default:
             break;
