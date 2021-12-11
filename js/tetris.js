@@ -89,7 +89,7 @@ function checkMatch(){
         let matched = true;
         child.children[0].childNodes.forEach(li=>{
             if(!li.classList.contains("seized")){
-                matched = fasle;
+                matched = false;
             }
         })
         if(matched){
@@ -105,9 +105,6 @@ function generateNewBlock() {
     downInterval = setInterval(()=>{
             moveBlock('top',1)
     },duration)
-
-
-
 
     const blockArray = Object.entries(BLOCKS);
     const randomIndex = Math.floor(Math.random() * blockArray.length)
