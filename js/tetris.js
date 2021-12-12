@@ -62,7 +62,7 @@ function renderBlocks(moveType=""){
             target.classList.add(type, "moving")
         } else {
             tempMovingItem = { ...MovingItem }
-                if(moneType ==='retry'){
+                if(moveType ==='retry'){
                     clearInterval(downInterval)
                     showGameoverText()
                 }
@@ -145,7 +145,7 @@ function dropblock() {
     },10)
 }
 function showGameoverText() {
-    gameText.getElementsByClassName.display = "flex"
+    gameText.style.display = "flex"
 }
 //event handling
 document.addEventListener("keydown", e => {
