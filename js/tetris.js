@@ -3,7 +3,9 @@ import BLOCKS from "./blocks.js"
 //DOM
 
 const playground = document.querySelector(".playground > ul");
-
+const gameText = document.querySelector(".game-text");
+const scoreDisplay = document.querySelector(".score");
+const restartButton = document.querySelector(".game-text > button");
 //Setting
 const GAME_ROMS = 20;
 const GAME_COLS = 10;
@@ -60,8 +62,12 @@ function renderBlocks(moveType=""){
             target.classList.add(type, "moving")
         } else {
             tempMovingItem = { ...MovingItem }
+                if(moneType ==='retry'){
+                    clearInterval(downInterval)
+                    showGameoverText()
+                }
             setTimeout(()=> {
-                renderBlocks();
+                renderBlocks('retry');
                 if(moveType == "top"){
                     seizeBlock();
                 }
@@ -95,6 +101,8 @@ function checkMatch(){
         if(matched){
             child.remove();
             prependNewLine()
+            score+=100;
+            scoreDisplay.innerText = score;
         }
     })
     generateNewBlock()
@@ -136,6 +144,9 @@ function dropblock() {
         moveBlock("top",1)
     },10)
 }
+function showGameoverText() {
+    gameText.getElementsByClassName.display = "flex"
+}
 //event handling
 document.addEventListener("keydown", e => {
     switch(e.keyCode){
@@ -158,4 +169,10 @@ document.addEventListener("keydown", e => {
             break;
     }
     // console.log(e)
+})
+
+restartButton.addEventListener("click",()=>{
+    playground.innerHTML = "";
+    gameText.style.display = "none"
+    init()
 })
